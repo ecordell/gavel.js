@@ -23,8 +23,10 @@ module.exports = () ->
 
       @real.expected = new gavel.ExpectedHttpResponse @expected
       http = new gavel.HttpResponse @real
-      
+
       gavel.validate http, (error,result) ->
+        console.error 'result'
+        console.error result
         cb error, result 
 
     

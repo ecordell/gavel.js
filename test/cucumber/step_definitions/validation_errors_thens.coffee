@@ -6,7 +6,8 @@ validationErrorsThens = () ->
     @validate (error, result) =>
       if error
         callback.fail "Error during validation: " + error
-
+      console.error 'target'
+      console.error target
       target = @toCamelCase(target)
       targetResult = result[target]
       errorsCount = targetResult.length

@@ -38,7 +38,7 @@ class BodyValidator
             @schema = JSON.parse schema
 
           catch error
-            throw new Error 'Body: schema is not object or parseable JSON'
+            throw new Error 'Body validator: schema is not object or parseable JSON'
         else if Object.keys(schema).length == 0
           @schema = null
         else
@@ -57,7 +57,7 @@ class BodyValidator
         validatorType = 'string'
         @expected = expected
     else
-      throw new errors.NotEnoughDataError "expected data or json schema must be defined"
+      throw new errors.NotEnoughDataError "Body validator: expected data or json schema must be defined"
     if validatorType == 'json'
       try
         @real = JSON.parse(real)

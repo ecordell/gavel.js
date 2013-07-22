@@ -1,2 +1,2 @@
 #!/bin/sh
-./node_modules/cucumber/bin/cucumber.js -f pretty -t @wip -r test/cucumber/support/ -r test/cucumber/step_definitions/ ./test/cucumber/features
+./node_modules/cucumber/bin/cucumber.js -f pretty -t @tully -r test/cucumber/support/ -r test/cucumber/step_definitions/ ./test/cucumber/features
