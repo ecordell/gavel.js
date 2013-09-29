@@ -2,7 +2,7 @@
   "name": "gavel",
   "version": "0.2.0",
   "description": "Gavel HTTP validator JavaScript library",
-  "main": "lib/gavel.js",
+  "main": "src/gavel.coffee",
   "directories": {
     "test": "test"
   },
