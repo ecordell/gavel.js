@@ -10,7 +10,7 @@
     "gavel": "bin/gavel"
   },
   "dependencies": {
-     "amanda": "git://github.com/apiaryio/Amanda.git#2e5c07d85b83b0ed1059050cae80860019ee740e",
+    "amanda": "https://github.com/ecordell/amanda/tarball/master",
     "async": "~0.2.10",
     "commander": "~2.1.0",
     "curl-trace-parser": "0.0.8",
