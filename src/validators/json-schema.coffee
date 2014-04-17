@@ -1,4 +1,4 @@
-amanda = require 'amanda'
+tv4 = require 'tv4'
 crypto = require('crypto')
 jsonPointer = require 'json-pointer'
 
@@ -28,7 +28,7 @@ json_schema_options =
 # Validates given data against given schema
 # @author Peter Grilli <tully@apiary.io>
 class JsonSchema
-  
+
   # Construct a JsonValidator and checks given data
   #@param {} [Object|String] data to validate
   #@param {} [Object|String] json schema
@@ -41,7 +41,7 @@ class JsonSchema
         outError = new errors.DataNotJsonParsableError 'JSON validator: body: ' + error.message
         outError['data'] = @data
         throw outError
-    
+
     if typeof @schema == 'string'
       try
         @schema = JSON.parse(schema)
@@ -85,11 +85,11 @@ class JsonSchema
       indexes = [0..data.length - 1]
       indexes.forEach (index) ->
         item = data[index]
-        pointer = item['property'] or []
+        pointer = item['dataPath'] or []
         message =
-          pointer: jsonPointer.compile pointer
+          pointer: item.dataPath
           severity: 'error'
-          message: item.message
+          message: item.dataPath + ' - ' + item.message
         results.push message
 
     return results
@@ -97,14 +97,10 @@ class JsonSchema
   #@private
   validatePrivate: ->
     try
-      return amanda.validate  @data, @schema, json_schema_options, (error) =>
-        if error?.length > 0
-          for i in [0..error.length-1]
-            if error[i].property == ''
-              error[i].property = []
-
-        return @errors = new ValidationErrors error
-
+      result = tv4.validateMultiple @data, @schema
+      if not result.valid
+        if result?.errors?.length > 0
+          return @errors = new ValidationErrors result.errors
     catch error
       error = {
         "0":{
